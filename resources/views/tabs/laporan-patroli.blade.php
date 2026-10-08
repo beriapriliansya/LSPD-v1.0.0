@@ -107,10 +107,54 @@ I began coordinating and requesting additional units for backup. The pursuit con
               </button>
             </div>
 
-            <!-- COLUMN 2: Middle Live BBCode & Analysis -->
+            <!-- COLUMN 2: Middle Live BBCode & Editor Guide -->
             <div style="display:flex; flex-direction:column; gap:1.25rem;">
 
+              <!-- Panduan Lengkap Tools Editor Forum -->
+              <div class="patrol-gen-card">
+                <div class="patrol-gen-header" style="font-size:0.9rem;">
+                  <i class="fa-solid fa-wrench"></i> Panduan Lengkap Tools Editor Forum
+                </div>
 
+                <div class="forum-guide-grid">
+                  <div class="forum-guide-item">
+                    <strong>B I U :</strong> Tebal, Miring, Garis Bawah.
+                  </div>
+                  <div class="forum-guide-item">
+                    <strong>" :</strong> Membuat blok kutipan teks (Quote).
+                  </div>
+                  <div class="forum-guide-item">
+                    <strong>&lt;/&gt; :</strong> Menuliskan kode script (Code format).
+                  </div>
+                  <div class="forum-guide-item">
+                    <strong>List Icons & * :</strong> Membuat daftar *bullet* atau penomoran.
+                  </div>
+                  <div class="forum-guide-item">
+                    <strong>Image Icon :</strong> Menyisipkan link gambar.
+                  </div>
+                  <div class="forum-guide-item">
+                    <strong>Rantai Icon :</strong> Menyematkan URL/Link website.
+                  </div>
+                  <div class="forum-guide-item">
+                    <strong>Tetes Air :</strong> Mengubah warna teks (Color).
+                  </div>
+                  <div class="forum-guide-item">
+                    <strong>Normal :</strong> Mengubah ukuran font.
+                  </div>
+                  <div class="forum-guide-item">
+                    <strong>Mata :</strong> Membuat Spoiler (menyembunyikan konten gambar/panjang).
+                  </div>
+                  <div class="forum-guide-item">
+                    <strong>align, center... :</strong> Mengatur perataan teks.
+                  </div>
+                  <div class="forum-guide-item">
+                    <strong>box, divbox :</strong> Membuat kotak container layout.
+                  </div>
+                  <div class="forum-guide-item">
+                    <strong>br & hr :</strong> Garis baru & pembatas horizontal.
+                  </div>
+                </div>
+              </div>
 
               <!-- BBCode Output Box -->
               <div class="patrol-gen-card">
@@ -125,11 +169,9 @@ I began coordinating and requesting additional units for backup. The pursuit con
                 <textarea id="pGenBBCodeOutput" class="bbcode-output-box" readonly></textarea>
               </div>
 
-
-
             </div>
 
-            <!-- COLUMN 3: Right Forum Preview & Editor Guide -->
+            <!-- COLUMN 3: Right Forum Preview -->
             <div style="display:flex; flex-direction:column; gap:1.25rem;">
 
               <!-- Forum Preview (Contoh Patrol Report) Card -->
@@ -204,52 +246,6 @@ I began coordinating and requesting additional units for backup. The pursuit con
 
                   </div>
 
-                </div>
-              </div>
-
-              <!-- Panduan Lengkap Tools Editor Forum -->
-              <div class="patrol-gen-card">
-                <div class="patrol-gen-header" style="font-size:0.9rem;">
-                  <i class="fa-solid fa-wrench"></i> Panduan Lengkap Tools Editor Forum
-                </div>
-
-                <div class="forum-guide-grid">
-                  <div class="forum-guide-item">
-                    <strong>B I U :</strong> Tebal, Miring, Garis Bawah.
-                  </div>
-                  <div class="forum-guide-item">
-                    <strong>" :</strong> Membuat blok kutipan teks (Quote).
-                  </div>
-                  <div class="forum-guide-item">
-                    <strong>&lt;/&gt; :</strong> Menuliskan kode script (Code format).
-                  </div>
-                  <div class="forum-guide-item">
-                    <strong>List Icons & * :</strong> Membuat daftar *bullet* atau penomoran.
-                  </div>
-                  <div class="forum-guide-item">
-                    <strong>Image Icon :</strong> Menyisipkan link gambar.
-                  </div>
-                  <div class="forum-guide-item">
-                    <strong>Rantai Icon :</strong> Menyematkan URL/Link website.
-                  </div>
-                  <div class="forum-guide-item">
-                    <strong>Tetes Air :</strong> Mengubah warna teks (Color).
-                  </div>
-                  <div class="forum-guide-item">
-                    <strong>Normal :</strong> Mengubah ukuran font.
-                  </div>
-                  <div class="forum-guide-item">
-                    <strong>Mata :</strong> Membuat Spoiler (menyembunyikan konten gambar/panjang).
-                  </div>
-                  <div class="forum-guide-item">
-                    <strong>align, center... :</strong> Mengatur perataan teks.
-                  </div>
-                  <div class="forum-guide-item">
-                    <strong>box, divbox :</strong> Membuat kotak container layout.
-                  </div>
-                  <div class="forum-guide-item">
-                    <strong>br & hr :</strong> Garis baru & pembatas horizontal.
-                  </div>
                 </div>
               </div>
 
