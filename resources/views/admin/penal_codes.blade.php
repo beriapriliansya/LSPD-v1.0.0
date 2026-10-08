@@ -131,7 +131,7 @@
         ['label' => 'Alat Produksi Narkoba Kategori A (< 10 Item)', 'code' => '(6)07'],
         ['label' => 'Alat Produksi Narkoba Kategori B (>= 10 Item)', 'code' => '(6)07-131'],
         ['label' => 'Produksi Narkoba (Drug Manufacturing)', 'code' => '(6)08'],
-        ['label' => 'Penjualan Narkoba (Drugs Selling)', 'code' => '(6)09'],
+        ['label' => 'Penjualan Narkoba (Drugs Selling)', 'code' => '(6)08-133'],
         ['label' => 'Pengedaran Narkoba (> 800g)', 'code' => '(6)08'],
         ['label' => 'Penyelundupan Narkoba (> 2000g)', 'code' => '(6)04'],
         ['label' => 'Perdagangan Narkoba Masif (> 4000g)', 'code' => '(6)05'],
@@ -145,7 +145,7 @@
         ['label' => 'Uang Merah Tingkat 3 ($50k-$150k)', 'code' => '(4)33'],
         ['label' => 'Uang Merah Tingkat 2 ($150k-$400k)', 'code' => '(4)32'],
         ['label' => 'Uang Merah Tingkat 1 (> $400,000)', 'code' => '(4)09'],
-        ['label' => 'Membuang Barang Bukti', 'code' => '(4)17.A'],
+        ['label' => 'Membuang Barang Bukti', 'code' => '(4)17'],
         ['label' => 'Resisting Arrest / Kabur Ditangkap', 'code' => '(5)07'],
       ]
     ]
@@ -186,29 +186,29 @@
           @foreach($cardConfig['items'] as $item)
             @php
               $dbCode = $allPenalCodes->first(function($p) use ($item) {
-                return str_contains($p->code, $item['code']);
+                return str_contains($p->code, $item['code']) || str_contains($item['code'], $p->code);
               });
             @endphp
 
             <div class="case-guide-row">
               <span class="case-guide-label" title="{{ $item['label'] }}">{{ $item['label'] }}</span>
-              <div class="case-guide-right">
+              <div class="case-guide-right" style="max-width: 70%;">
                 <div class="indicator-bar {{ ($dbCode && $dbCode->type === 'Felony') ? 'indicator-red' : (($dbCode && $dbCode->type === 'Court Verdict') ? 'indicator-orange' : 'indicator-blue') }}"></div>
-                <div class="case-code-box {{ ($dbCode && $dbCode->type === 'Felony') ? 'danger-box' : (($dbCode && $dbCode->type === 'Court Verdict') ? 'warning-box' : '') }}">
-                  <span class="case-code-text" title="{{ $dbCode ? $dbCode->code . '. ' . $dbCode->title : $item['code'] }}">
+                <div class="case-code-box {{ ($dbCode && $dbCode->type === 'Felony') ? 'danger-box' : (($dbCode && $dbCode->type === 'Court Verdict') ? 'warning-box' : '') }}" style="display: flex; align-items: center; justify-content: space-between; gap: 0.35rem; width: 100%; min-width: 0;">
+                  <span class="case-code-text" style="flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="{{ $dbCode ? $dbCode->code . '. ' . $dbCode->title : $item['code'] }}">
                     <i class="fa-regular fa-folder-open" style="margin-right: 0.25rem;"></i> {{ $dbCode ? $dbCode->code . '. ' . $dbCode->title : $item['code'] }}
                   </span>
                   
                   <!-- Admin Action Buttons (Edit & Delete) -->
                   @if($dbCode)
-                    <div style="display: flex; gap: 0.2rem; align-items: center; margin-left: 0.25rem;">
-                      <button type="button" data-json="{{ htmlspecialchars(json_encode($dbCode), ENT_QUOTES, 'UTF-8') }}" onclick="openEditPenalModalFromBtn(this)" class="case-copy-btn" style="width: 20px; height: 20px; font-size: 0.65rem; cursor: pointer;" title="Edit Pasal">
+                    <div style="display: flex; gap: 0.3rem; align-items: center; flex-shrink: 0; position: relative; z-index: 10;">
+                      <button type="button" data-json="{{ htmlspecialchars(json_encode($dbCode), ENT_QUOTES, 'UTF-8') }}" onclick="openEditPenalModalFromBtn(this)" style="background: rgba(59, 130, 246, 0.25); border: 1px solid rgba(59, 130, 246, 0.5); color: #60a5fa; width: 24px; height: 24px; border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.72rem; cursor: pointer; transition: all 0.15s ease;" title="Edit Pasal">
                         <i class="fa-solid fa-pen"></i>
                       </button>
                       <form action="{{ route('admin.penal_codes.destroy', $dbCode->id) }}" method="POST" onsubmit="return confirmDeletePenal(event, this, '{{ addslashes($dbCode->code) }}')" style="display: inline-block; margin: 0;">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="case-copy-btn" style="width: 20px; height: 20px; font-size: 0.65rem; color: #ef4444; border-color: rgba(239, 68, 68, 0.4); cursor: pointer;" title="Hapus Pasal">
+                        <button type="submit" style="background: rgba(239, 68, 68, 0.25); border: 1px solid rgba(239, 68, 68, 0.5); color: #ef4444; width: 24px; height: 24px; border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.72rem; cursor: pointer; transition: all 0.15s ease;" title="Hapus Pasal">
                           <i class="fa-solid fa-trash"></i>
                         </button>
                       </form>
@@ -230,21 +230,21 @@
             @if(!$alreadyRendered)
               <div class="case-guide-row" style="border-left: 2px solid #3b82f6;">
                 <span class="case-guide-label" title="{{ $codeItem->title }}">{{ $codeItem->title }}</span>
-                <div class="case-guide-right">
+                <div class="case-guide-right" style="max-width: 70%;">
                   <div class="indicator-bar {{ $codeItem->type === 'Felony' ? 'indicator-red' : ($codeItem->type === 'Court Verdict' ? 'indicator-orange' : 'indicator-blue') }}"></div>
-                  <div class="case-code-box {{ $codeItem->type === 'Felony' ? 'danger-box' : ($codeItem->type === 'Court Verdict' ? 'warning-box' : '') }}">
-                    <span class="case-code-text" title="{{ $codeItem->code }}. {{ $codeItem->title }}">
+                  <div class="case-code-box {{ $codeItem->type === 'Felony' ? 'danger-box' : ($codeItem->type === 'Court Verdict' ? 'warning-box' : '') }}" style="display: flex; align-items: center; justify-content: space-between; gap: 0.35rem; width: 100%; min-width: 0;">
+                    <span class="case-code-text" style="flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="{{ $codeItem->code }}. {{ $codeItem->title }}">
                       <i class="fa-regular fa-folder-open" style="margin-right: 0.25rem;"></i> {{ $codeItem->code }}
                     </span>
                     
-                    <div style="display: flex; gap: 0.2rem; align-items: center; margin-left: 0.25rem;">
-                      <button type="button" data-json="{{ htmlspecialchars(json_encode($codeItem), ENT_QUOTES, 'UTF-8') }}" onclick="openEditPenalModalFromBtn(this)" class="case-copy-btn" style="width: 20px; height: 20px; font-size: 0.65rem; cursor: pointer;" title="Edit Pasal">
+                    <div style="display: flex; gap: 0.3rem; align-items: center; flex-shrink: 0; position: relative; z-index: 10;">
+                      <button type="button" data-json="{{ htmlspecialchars(json_encode($codeItem), ENT_QUOTES, 'UTF-8') }}" onclick="openEditPenalModalFromBtn(this)" style="background: rgba(59, 130, 246, 0.25); border: 1px solid rgba(59, 130, 246, 0.5); color: #60a5fa; width: 24px; height: 24px; border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.72rem; cursor: pointer; transition: all 0.15s ease;" title="Edit Pasal">
                         <i class="fa-solid fa-pen"></i>
                       </button>
                       <form action="{{ route('admin.penal_codes.destroy', $codeItem->id) }}" method="POST" onsubmit="return confirmDeletePenal(event, this, '{{ addslashes($codeItem->code) }}')" style="display: inline-block; margin: 0;">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="case-copy-btn" style="width: 20px; height: 20px; font-size: 0.65rem; color: #ef4444; border-color: rgba(239, 68, 68, 0.4); cursor: pointer;" title="Hapus Pasal">
+                        <button type="submit" style="background: rgba(239, 68, 68, 0.25); border: 1px solid rgba(239, 68, 68, 0.5); color: #ef4444; width: 24px; height: 24px; border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.72rem; cursor: pointer; transition: all 0.15s ease;" title="Hapus Pasal">
                           <i class="fa-solid fa-trash"></i>
                         </button>
                       </form>
@@ -297,21 +297,21 @@
             @foreach($codes as $codeItem)
               <div class="case-guide-row">
                 <span class="case-guide-label" title="{{ $codeItem->title }}">{{ $codeItem->title }}</span>
-                <div class="case-guide-right">
+                <div class="case-guide-right" style="max-width: 70%;">
                   <div class="indicator-bar {{ $codeItem->type === 'Felony' ? 'indicator-red' : ($codeItem->type === 'Court Verdict' ? 'indicator-orange' : 'indicator-blue') }}"></div>
-                  <div class="case-code-box {{ $codeItem->type === 'Felony' ? 'danger-box' : ($codeItem->type === 'Court Verdict' ? 'warning-box' : '') }}">
-                    <span class="case-code-text" title="{{ $codeItem->code }}. {{ $codeItem->title }}">
+                  <div class="case-code-box {{ $codeItem->type === 'Felony' ? 'danger-box' : ($codeItem->type === 'Court Verdict' ? 'warning-box' : '') }}" style="display: flex; align-items: center; justify-content: space-between; gap: 0.35rem; width: 100%; min-width: 0;">
+                    <span class="case-code-text" style="flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="{{ $codeItem->code }}. {{ $codeItem->title }}">
                       <i class="fa-regular fa-folder-open" style="margin-right: 0.25rem;"></i> {{ $codeItem->code }}
                     </span>
                     
-                    <div style="display: flex; gap: 0.2rem; align-items: center; margin-left: 0.25rem;">
-                      <button type="button" data-json="{{ htmlspecialchars(json_encode($codeItem), ENT_QUOTES, 'UTF-8') }}" onclick="openEditPenalModalFromBtn(this)" class="case-copy-btn" style="width: 20px; height: 20px; font-size: 0.65rem; cursor: pointer;" title="Edit Pasal">
+                    <div style="display: flex; gap: 0.3rem; align-items: center; flex-shrink: 0; position: relative; z-index: 10;">
+                      <button type="button" data-json="{{ htmlspecialchars(json_encode($codeItem), ENT_QUOTES, 'UTF-8') }}" onclick="openEditPenalModalFromBtn(this)" style="background: rgba(59, 130, 246, 0.25); border: 1px solid rgba(59, 130, 246, 0.5); color: #60a5fa; width: 24px; height: 24px; border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.72rem; cursor: pointer; transition: all 0.15s ease;" title="Edit Pasal">
                         <i class="fa-solid fa-pen"></i>
                       </button>
                       <form action="{{ route('admin.penal_codes.destroy', $codeItem->id) }}" method="POST" onsubmit="return confirmDeletePenal(event, this, '{{ addslashes($codeItem->code) }}')" style="display: inline-block; margin: 0;">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="case-copy-btn" style="width: 20px; height: 20px; font-size: 0.65rem; color: #ef4444; border-color: rgba(239, 68, 68, 0.4); cursor: pointer;" title="Hapus Pasal">
+                        <button type="submit" style="background: rgba(239, 68, 68, 0.25); border: 1px solid rgba(239, 68, 68, 0.5); color: #ef4444; width: 24px; height: 24px; border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.72rem; cursor: pointer; transition: all 0.15s ease;" title="Hapus Pasal">
                           <i class="fa-solid fa-trash"></i>
                         </button>
                       </form>

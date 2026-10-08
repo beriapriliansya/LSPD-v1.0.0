@@ -114,7 +114,7 @@
         ['label' => 'Alat Produksi Narkoba Kategori A (< 10 Item)', 'code' => '(6)07'],
         ['label' => 'Alat Produksi Narkoba Kategori B (>= 10 Item)', 'code' => '(6)07-131'],
         ['label' => 'Produksi Narkoba (Drug Manufacturing)', 'code' => '(6)08'],
-        ['label' => 'Penjualan Narkoba (Drugs Selling)', 'code' => '(6)09'],
+        ['label' => 'Penjualan Narkoba (Drugs Selling)', 'code' => '(6)08-133'],
         ['label' => 'Pengedaran Narkoba (> 800g)', 'code' => '(6)08'],
         ['label' => 'Penyelundupan Narkoba (> 2000g)', 'code' => '(6)04'],
         ['label' => 'Perdagangan Narkoba Masif (> 4000g)', 'code' => '(6)05'],
@@ -128,7 +128,7 @@
         ['label' => 'Uang Merah Tingkat 3 ($50k-$150k)', 'code' => '(4)33'],
         ['label' => 'Uang Merah Tingkat 2 ($150k-$400k)', 'code' => '(4)32'],
         ['label' => 'Uang Merah Tingkat 1 (> $400,000)', 'code' => '(4)09'],
-        ['label' => 'Membuang Barang Bukti', 'code' => '(4)17.A'],
+        ['label' => 'Membuang Barang Bukti', 'code' => '(4)17'],
         ['label' => 'Resisting Arrest / Kabur Ditangkap', 'code' => '(5)07'],
       ]
     ]
