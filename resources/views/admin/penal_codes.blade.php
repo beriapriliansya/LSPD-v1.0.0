@@ -202,8 +202,8 @@
                   <!-- Admin Action Buttons (Edit & Delete) -->
                   @if($dbCode)
                     <div style="display: flex; gap: 0.3rem; align-items: center; flex-shrink: 0; position: relative; z-index: 10;">
-                      <button type="button" data-json="{{ htmlspecialchars(json_encode($dbCode), ENT_QUOTES, 'UTF-8') }}" onclick="openEditPenalModalFromBtn(this)" style="background: rgba(59, 130, 246, 0.25); border: 1px solid rgba(59, 130, 246, 0.5); color: #60a5fa; width: 24px; height: 24px; border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.72rem; cursor: pointer; transition: all 0.15s ease;" title="Edit Pasal">
-                        <i class="fa-solid fa-pen"></i>
+                      <button type="button" data-id="{{ $dbCode->id }}" data-code="{{ $dbCode->code }}" data-category="{{ $dbCode->category }}" data-title="{{ $dbCode->title }}" data-fine="{{ $dbCode->fine }}" data-jail="{{ $dbCode->jail_time }}" data-type="{{ $dbCode->type }}" data-desc="{{ $dbCode->description }}" data-json="{{ htmlspecialchars(json_encode($dbCode), ENT_QUOTES, 'UTF-8') }}" onclick="openEditPenalModalFromBtn(this)" style="background: rgba(59, 130, 246, 0.25); border: 1px solid rgba(59, 130, 246, 0.5); color: #60a5fa; width: 24px; height: 24px; border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.72rem; cursor: pointer; transition: all 0.15s ease;" title="Edit Pasal">
+                        <i class="fa-solid fa-pen" style="pointer-events: none;"></i>
                       </button>
                       <form action="{{ route('admin.penal_codes.destroy', $dbCode->id) }}" method="POST" onsubmit="return confirmDeletePenal(event, this, '{{ addslashes($dbCode->code) }}')" style="display: inline-block; margin: 0;">
                         @csrf
@@ -238,8 +238,8 @@
                     </span>
                     
                     <div style="display: flex; gap: 0.3rem; align-items: center; flex-shrink: 0; position: relative; z-index: 10;">
-                      <button type="button" data-json="{{ htmlspecialchars(json_encode($codeItem), ENT_QUOTES, 'UTF-8') }}" onclick="openEditPenalModalFromBtn(this)" style="background: rgba(59, 130, 246, 0.25); border: 1px solid rgba(59, 130, 246, 0.5); color: #60a5fa; width: 24px; height: 24px; border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.72rem; cursor: pointer; transition: all 0.15s ease;" title="Edit Pasal">
-                        <i class="fa-solid fa-pen"></i>
+                      <button type="button" data-id="{{ $codeItem->id }}" data-code="{{ $codeItem->code }}" data-category="{{ $codeItem->category }}" data-title="{{ $codeItem->title }}" data-fine="{{ $codeItem->fine }}" data-jail="{{ $codeItem->jail_time }}" data-type="{{ $codeItem->type }}" data-desc="{{ $codeItem->description }}" data-json="{{ htmlspecialchars(json_encode($codeItem), ENT_QUOTES, 'UTF-8') }}" onclick="openEditPenalModalFromBtn(this)" style="background: rgba(59, 130, 246, 0.25); border: 1px solid rgba(59, 130, 246, 0.5); color: #60a5fa; width: 24px; height: 24px; border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.72rem; cursor: pointer; transition: all 0.15s ease;" title="Edit Pasal">
+                        <i class="fa-solid fa-pen" style="pointer-events: none;"></i>
                       </button>
                       <form action="{{ route('admin.penal_codes.destroy', $codeItem->id) }}" method="POST" onsubmit="return confirmDeletePenal(event, this, '{{ addslashes($codeItem->code) }}')" style="display: inline-block; margin: 0;">
                         @csrf
@@ -305,8 +305,8 @@
                     </span>
                     
                     <div style="display: flex; gap: 0.3rem; align-items: center; flex-shrink: 0; position: relative; z-index: 10;">
-                      <button type="button" data-json="{{ htmlspecialchars(json_encode($codeItem), ENT_QUOTES, 'UTF-8') }}" onclick="openEditPenalModalFromBtn(this)" style="background: rgba(59, 130, 246, 0.25); border: 1px solid rgba(59, 130, 246, 0.5); color: #60a5fa; width: 24px; height: 24px; border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.72rem; cursor: pointer; transition: all 0.15s ease;" title="Edit Pasal">
-                        <i class="fa-solid fa-pen"></i>
+                      <button type="button" data-id="{{ $codeItem->id }}" data-code="{{ $codeItem->code }}" data-category="{{ $codeItem->category }}" data-title="{{ $codeItem->title }}" data-fine="{{ $codeItem->fine }}" data-jail="{{ $codeItem->jail_time }}" data-type="{{ $codeItem->type }}" data-desc="{{ $codeItem->description }}" data-json="{{ htmlspecialchars(json_encode($codeItem), ENT_QUOTES, 'UTF-8') }}" onclick="openEditPenalModalFromBtn(this)" style="background: rgba(59, 130, 246, 0.25); border: 1px solid rgba(59, 130, 246, 0.5); color: #60a5fa; width: 24px; height: 24px; border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.72rem; cursor: pointer; transition: all 0.15s ease;" title="Edit Pasal">
+                        <i class="fa-solid fa-pen" style="pointer-events: none;"></i>
                       </button>
                       <form action="{{ route('admin.penal_codes.destroy', $codeItem->id) }}" method="POST" onsubmit="return confirmDeletePenal(event, this, '{{ addslashes($codeItem->code) }}')" style="display: inline-block; margin: 0;">
                         @csrf
@@ -396,10 +396,9 @@
           </span>
         </div>
 
-        <!-- Action Item Buttons (Edit & Delete) -->
-        <div style="display: flex; gap: 0.3rem; align-items: center; flex-shrink: 0;">
-          <button type="button" data-json="{{ htmlspecialchars(json_encode($codeItem), ENT_QUOTES, 'UTF-8') }}" onclick="openEditPenalModalFromBtn(this)" style="background: rgba(59, 130, 246, 0.2); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.4); padding: 0.2rem 0.45rem; border-radius: 4px; font-size: 0.72rem; cursor: pointer; transition: all 0.15s ease;" title="Edit Pasal">
-            <i class="fa-solid fa-pen"></i>
+        <div style="display: flex; gap: 0.3rem; align-items: center; flex-shrink: 0; position: relative; z-index: 10;">
+          <button type="button" data-id="{{ $codeItem->id }}" data-code="{{ $codeItem->code }}" data-category="{{ $codeItem->category }}" data-title="{{ $codeItem->title }}" data-fine="{{ $codeItem->fine }}" data-jail="{{ $codeItem->jail_time }}" data-type="{{ $codeItem->type }}" data-desc="{{ $codeItem->description }}" data-json="{{ htmlspecialchars(json_encode($codeItem), ENT_QUOTES, 'UTF-8') }}" onclick="openEditPenalModalFromBtn(this)" style="background: rgba(59, 130, 246, 0.2); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.4); padding: 0.2rem 0.45rem; border-radius: 4px; font-size: 0.72rem; cursor: pointer; transition: all 0.15s ease;" title="Edit Pasal">
+            <i class="fa-solid fa-pen" style="pointer-events: none;"></i>
           </button>
           <form action="{{ route('admin.penal_codes.destroy', $codeItem->id) }}" method="POST" onsubmit="return confirmDeletePenal(event, this, '{{ addslashes($codeItem->code) }}')" style="display: inline-block; margin: 0;">
             @csrf
@@ -576,11 +575,11 @@
       <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
         <div>
           <label style="font-size: 0.78rem; color: #94a3b8; font-weight: 700; display: block; margin-bottom: 0.35rem;">Jumlah Denda ($)</label>
-          <input type="number" id="edit_fine" name="fine" class="admin-input" required>
+          <input type="text" id="edit_fine" name="fine" class="admin-input" required>
         </div>
         <div>
           <label style="font-size: 0.78rem; color: #94a3b8; font-weight: 700; display: block; margin-bottom: 0.35rem;">Penjara (Bulan)</label>
-          <input type="number" id="edit_jail_time" name="jail_time" class="admin-input" required>
+          <input type="text" id="edit_jail_time" name="jail_time" class="admin-input" required>
         </div>
         <div>
           <label style="font-size: 0.78rem; color: #94a3b8; font-weight: 700; display: block; margin-bottom: 0.35rem;">Tipe Pelanggaran</label>
@@ -659,25 +658,51 @@ function openAddPenalModal(presetCategory = '') {
   document.getElementById('addPenalModal').style.display = 'flex';
 }
 
+function openEditFromData(btn) {
+  if (!btn) return;
+  const id = btn.getAttribute('data-id');
+  const code = btn.getAttribute('data-code');
+  const category = btn.getAttribute('data-category');
+  const title = btn.getAttribute('data-title');
+  const fine = btn.getAttribute('data-fine');
+  const jail = btn.getAttribute('data-jail');
+  const type = btn.getAttribute('data-type');
+  const desc = btn.getAttribute('data-desc');
+
+  document.getElementById('editPenalForm').action = "/admin/penal-codes/" + id;
+  document.getElementById('edit_code').value = code || '';
+  document.getElementById('edit_category').value = category || '';
+  document.getElementById('edit_title').value = title || '';
+  document.getElementById('edit_fine').value = fine || '';
+  document.getElementById('edit_jail_time').value = jail || '';
+  document.getElementById('edit_type').value = type || 'Misdemeanor';
+  document.getElementById('edit_description').value = desc || '';
+  document.getElementById('editPenalModal').style.display = 'flex';
+}
+
 function openEditPenalModalFromBtn(btn) {
+  if (!btn) return;
   const jsonStr = btn.getAttribute('data-json');
-  if (!jsonStr) return;
-  try {
-    const pc = JSON.parse(jsonStr);
-    openEditPenalModal(pc);
-  } catch(e) {
-    console.error("Error parsing penal code JSON:", e);
+  if (jsonStr) {
+    try {
+      const pc = JSON.parse(jsonStr);
+      openEditPenalModal(pc);
+      return;
+    } catch(e) {
+      console.warn("JSON parse error, using dataset fallback:", e);
+    }
   }
+  openEditFromData(btn);
 }
 
 function openEditPenalModal(pc) {
   document.getElementById('editPenalForm').action = "/admin/penal-codes/" + pc.id;
-  document.getElementById('edit_code').value = pc.code;
-  document.getElementById('edit_category').value = pc.category;
-  document.getElementById('edit_title').value = pc.title;
-  document.getElementById('edit_fine').value = pc.fine;
-  document.getElementById('edit_jail_time').value = pc.jail_time;
-  document.getElementById('edit_type').value = pc.type;
+  document.getElementById('edit_code').value = pc.code || '';
+  document.getElementById('edit_category').value = pc.category || '';
+  document.getElementById('edit_title').value = pc.title || '';
+  document.getElementById('edit_fine').value = pc.fine !== undefined ? pc.fine : '';
+  document.getElementById('edit_jail_time').value = pc.jail_time !== undefined ? pc.jail_time : '';
+  document.getElementById('edit_type').value = pc.type || 'Misdemeanor';
   document.getElementById('edit_description').value = pc.description || '';
   document.getElementById('editPenalModal').style.display = 'flex';
 }
