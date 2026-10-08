@@ -132,6 +132,81 @@ I began coordinating and requesting additional units for backup. The pursuit con
             <!-- COLUMN 3: Right Forum Preview & Editor Guide -->
             <div style="display:flex; flex-direction:column; gap:1.25rem;">
 
+              <!-- Forum Preview (Contoh Patrol Report) Card -->
+              <div class="patrol-gen-card">
+                <div class="patrol-gen-header" style="justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem;">
+                  <span style="font-size:0.9rem; font-weight:700; display:flex; align-items:center; gap:0.45rem; color:#ffffff;">
+                    <i class="fa-solid fa-circle-dot" style="color:#3b82f6;"></i> Forum Preview (Contoh Patrol Report)
+                  </span>
+                  <span style="background:#dc2626; color:#ffffff; padding:0.25rem 0.65rem; border-radius:4px; font-weight:800; font-size:0.7rem; letter-spacing:0.5px; display:inline-block;">
+                    LSPD FORUM STYLE
+                  </span>
+                </div>
+
+                <!-- Styled Forum Preview Container -->
+                <div style="background:#0b1329; border:1px solid rgba(255,255,255,0.1); border-radius:6px; padding:0.85rem; max-height:550px; overflow-y:auto; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+                  
+                  <!-- Top Banner Header Box -->
+                  <div style="background:#000066; color:#ffffff; text-align:center; font-weight:800; font-size:1.05rem; padding:0.5rem 0.25rem; letter-spacing:0.8px;">
+                    Los Santos Police Department
+                  </div>
+
+                  <!-- Subheader Box: PATROL REPORT -->
+                  <div style="border:1px solid #000000; background:#ffffff; color:#000000; text-align:center; font-weight:800; font-size:0.9rem; padding:0.35rem 0.25rem; margin:0.4rem 0;">
+                    PATROL REPORT
+                  </div>
+
+                  <!-- Section Header A: GENERAL INFORMATION -->
+                  <div style="background:#000066; color:#ffffff; padding:0.3rem 0.5rem; font-weight:800; font-size:0.8rem; letter-spacing:0.5px;">
+                    A. GENERAL INFORMATION
+                  </div>
+
+                  <!-- Section Content Box A -->
+                  <div style="border:1px solid #000000; background:#ffffff; color:#000000; padding:0.65rem 0.75rem; margin-top:0.35rem; margin-bottom:0.6rem; font-size:0.82rem; line-height:1.6;">
+                    <div><strong>Officer Name :</strong> <span id="fpOfficerName">Milo Hale</span></div>
+                    <div><strong>Station :</strong> <span id="fpStation">71</span></div>
+                    <div><strong>Rank :</strong> <span id="fpRank">Rookie</span></div>
+                    <div><strong>Badge Number :</strong> <span id="fpBadge">71503</span></div>
+                  </div>
+
+                  <!-- Section Header B: PATROL REPORT OFFICER -->
+                  <div style="background:#000066; color:#ffffff; padding:0.3rem 0.5rem; font-weight:800; font-size:0.8rem; letter-spacing:0.5px;">
+                    B. PATROL REPORT OFFICER
+                  </div>
+
+                  <!-- Section Content Box B & Sub Reports Container -->
+                  <div id="fpSubReportsContainer" style="border:1px solid #000000; background:#ffffff; color:#000000; padding:0.65rem 0.75rem; margin-top:0.35rem;">
+                    
+                    <!-- First Report Card -->
+                    <div class="fp-first-report-card">
+                      <div style="background:#000066; color:#ffffff; padding:0.25rem 0.6rem; font-weight:800; font-size:0.78rem; display:inline-block; border-radius:2px; margin-bottom:0.5rem;">
+                        First Report
+                      </div>
+
+                      <div style="font-weight:700; font-size:0.82rem; color:#000000; margin-bottom:0.25rem;">Date:</div>
+                      <div style="border:1px solid #000000; padding:0.35rem 0.55rem; font-size:0.82rem; color:#000000; margin-bottom:0.6rem; background:#ffffff;">
+                        <span id="fpDate">21/01/2026</span>
+                      </div>
+
+                      <div style="font-weight:700; font-size:0.82rem; color:#000000; margin-bottom:0.25rem;">Details:</div>
+                      <div id="fpDetails" style="border:1px solid #000000; padding:0.6rem 0.75rem; font-size:0.78rem; color:#1e293b; line-height:1.55; margin-bottom:0.6rem; background:#ffffff; white-space:pre-wrap;">At approximately 21:20 International Time, while conducting a routine patrol, I, Officer Milo Hale, received a report regarding brandishing a weapon and narcotics activity in front of the Alta Police Department. I immediately responded to the scene and observed a red sedan with license plate MLP 8172 fleeing the area.
+
+I began coordinating and requesting additional units for backup. The pursuit continued until the suspect vehicle became immobilized beneath the Olympic Freeway.</div>
+
+                      <div style="font-weight:700; font-size:0.82rem; color:#000000; margin-bottom:0.35rem;">Evidence:</div>
+                      <div id="fpEvidences" style="display:flex; flex-direction:column; gap:0.35rem;">
+                        <div style="border:1px solid #d1d5db; background:#f9fafb; border-radius:3px; padding:0.35rem 0.6rem; display:flex; justify-content:space-between; align-items:center; font-size:0.78rem; color:#374151;">
+                          <span>Vehicle Damage</span>
+                          <span style="background:#ef4444; color:#ffffff; width:18px; height:18px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.6rem;"><i class="fa-solid fa-eye"></i></span>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+
+                </div>
+              </div>
+
               <!-- Panduan Lengkap Tools Editor Forum -->
               <div class="patrol-gen-card">
                 <div class="patrol-gen-header" style="font-size:0.9rem;">
