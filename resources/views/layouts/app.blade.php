@@ -38,8 +38,8 @@
   @include('partials.modals')
 
   <!-- JS Dependencies -->
-  <script src="{{ asset('js/data.js') }}?v=10.0"></script>
-  <script src="{{ asset('js/app.js') }}?v=10.0"></script>
+  <script src="{{ asset('js/data.js') }}?v=12.0"></script>
+  <script src="{{ asset('js/app.js') }}?v=12.0"></script>
   @stack('scripts')
 </body>
 

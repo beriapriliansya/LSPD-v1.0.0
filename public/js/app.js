@@ -2227,11 +2227,16 @@ ${evidencesBbcodeStr}
 
     // Attach listeners to initial First Report form
     [officerInput, stationInput, rankInput, badgeInput, dateInput, chronologyInput].forEach(el => {
-      if (el) el.addEventListener('input', renderGenerator);
+      if (el) {
+        ['input', 'change', 'keyup', 'paste'].forEach(evt => el.addEventListener(evt, renderGenerator));
+      }
     });
 
     if (evidenceList) {
-      evidenceList.addEventListener('input', renderGenerator);
+      ['input', 'change', 'keyup', 'paste'].forEach(evt => evidenceList.addEventListener(evt, renderGenerator));
+      evidenceList.querySelectorAll('input').forEach(i => {
+        ['input', 'change', 'keyup', 'paste'].forEach(evt => i.addEventListener(evt, renderGenerator));
+      });
     }
 
     if (addEvidenceBtn && evidenceList) {
@@ -2248,7 +2253,9 @@ ${evidencesBbcodeStr}
           </div>
         `;
         evidenceList.appendChild(newRow);
-        newRow.querySelectorAll('input').forEach(i => i.addEventListener('input', renderGenerator));
+        newRow.querySelectorAll('input').forEach(i => {
+          ['input', 'change', 'keyup', 'paste'].forEach(evt => i.addEventListener(evt, renderGenerator));
+        });
         renderGenerator();
       });
     }
