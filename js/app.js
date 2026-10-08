@@ -1586,7 +1586,7 @@ r.chronology + "\n\n" +
     }
   }
 
-  // Global Forum Spoiler Toggle Handler & HTML Builder
+  // Global Forum Spoiler Toggle Handler & HTML Builder (Reference-Matched Design)
   window.toggleForumSpoiler = function(targetEl) {
     if (!targetEl) return;
     const box = targetEl.closest('.forum-spoiler-box');
@@ -1600,10 +1600,9 @@ r.chronology + "\n\n" +
       const isHidden = getComputedStyle(body).display === 'none' || body.style.display === 'none';
       body.style.display = isHidden ? 'block' : 'none';
       if (headerEl) {
-        headerEl.style.borderBottomColor = isHidden ? '#cbd5e1' : 'transparent';
-        headerEl.style.background = isHidden ? '#e2e8f0' : '#f8fafc';
+        headerEl.style.borderBottomColor = isHidden ? '#cccccc' : 'transparent';
       }
-      if (eyeBtn) eyeBtn.style.background = isHidden ? '#22c55e' : '#ef4444';
+      if (eyeBtn) eyeBtn.style.background = isHidden ? '#5cb85c' : '#d9534f';
       if (eyeIcon) eyeIcon.className = isHidden ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye';
     }
   };
@@ -1623,7 +1622,7 @@ r.chronology + "\n\n" +
     // Default to open (display:block) when valid URL is provided so user sees photo immediately!
     const isDefaultOpen = hasValidUrl;
     const bodyStyle = isDefaultOpen ? 'display:block;' : 'display:none;';
-    const eyeBg = isDefaultOpen ? '#22c55e' : '#ef4444';
+    const eyeBg = isDefaultOpen ? '#5cb85c' : '#d9534f';
     const eyeIconClass = isDefaultOpen ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye';
 
     let imgDisplay = '';
@@ -1632,16 +1631,13 @@ r.chronology + "\n\n" +
       imgDisplay = `
         <div style="text-align:center;">
           <a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" title="Klik untuk membuka gambar ukuran penuh">
-            <img src="${cleanUrl}" alt="${evName}" referrerpolicy="no-referrer" style="max-width:100%; max-height:300px; border-radius:4px; border:1px solid #cbd5e1; box-shadow:0 2px 5px rgba(0,0,0,0.15); object-fit:contain; background:#ffffff; display:block; margin:0 auto;" onerror="this.onerror=null; this.src='https://via.placeholder.com/600x300/11224e/ffffff?text=Gagal+Memuat+Gambar';" />
+            <img src="${cleanUrl}" alt="${evName}" referrerpolicy="no-referrer" style="max-width:100%; height:auto; border:1px solid #cccccc; display:block; margin:0 auto; background:#ffffff;" onerror="this.onerror=null; this.src='https://via.placeholder.com/600x300/11224e/ffffff?text=Gagal+Memuat+Gambar';" />
           </a>
-          <div style="margin-top:0.4rem; font-size:0.72rem; color:#475569;">
-            <a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" style="color:#2563eb; text-decoration:underline; font-weight:600;"><i class="fa-solid fa-arrow-up-right-from-square" style="font-size:0.65rem;"></i> Buka Gambar Ukuran Penuh</a>
-          </div>
         </div>
       `;
     } else if (cleanUrl && cleanUrl !== '-') {
       imgDisplay = `
-        <div style="padding:0.4rem 0.6rem; font-size:0.78rem; color:#334155; word-break:break-all; background:#ffffff; border-radius:3px; border:1px solid #e2e8f0;">
+        <div style="padding:0.4rem 0.6rem; font-size:0.78rem; color:#334155; word-break:break-all; background:#ffffff; border:1px solid #cccccc;">
           <i class="fa-solid fa-link" style="color:#3b82f6; margin-right:0.3rem;"></i> ${cleanUrl}
         </div>
       `;
@@ -1649,24 +1645,22 @@ r.chronology + "\n\n" +
       // Default realistic evidence preview placeholder
       imgDisplay = `
         <div style="text-align:center;">
-          <img src="https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=600&q=80" alt="${evName}" style="max-width:100%; max-height:220px; border-radius:4px; border:1px solid #cbd5e1; object-fit:cover; display:block; margin:0 auto;" onerror="this.onerror=null; this.src='https://via.placeholder.com/600x300/11224e/ffffff?text=${encodeURIComponent(evName)}';" />
-          <div style="margin-top:0.35rem; font-size:0.68rem; color:#64748b; font-style:italic;">[Evidence Image Preview] ${evName}</div>
+          <img src="https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=600&q=80" alt="${evName}" style="max-width:100%; height:auto; border:1px solid #cccccc; display:block; margin:0 auto;" onerror="this.onerror=null; this.src='https://via.placeholder.com/600x300/11224e/ffffff?text=${encodeURIComponent(evName)}';" />
         </div>
       `;
     }
 
     return `
-      <div class="forum-spoiler-box" style="border:1px solid #cbd5e1; background:#ffffff; border-radius:4px; overflow:hidden; margin-bottom:0.4rem; box-shadow:0 1px 2px rgba(0,0,0,0.05);">
-        <div class="forum-spoiler-header" style="background:${isDefaultOpen ? '#e2e8f0' : '#f8fafc'}; padding:0.45rem 0.7rem; display:flex; justify-content:space-between; align-items:center; font-size:0.78rem; color:#1e293b; cursor:pointer; user-select:none; border-bottom:1px solid ${isDefaultOpen ? '#cbd5e1' : 'transparent'};">
-          <span style="font-weight:600; display:flex; align-items:center; gap:0.45rem;">
-            <i class="fa-solid fa-image" style="color:#3b82f6; font-size:0.8rem;"></i>
+      <div class="forum-spoiler-box" style="border:1px solid #cccccc; background:#ffffff; margin-bottom:0.4rem;">
+        <div class="forum-spoiler-header" style="background:#f4f4f4; padding:0.4rem 0.6rem; display:flex; justify-content:space-between; align-items:center; font-size:0.85rem; color:#333333; cursor:pointer; user-select:none; border-bottom:1px solid ${isDefaultOpen ? '#cccccc' : 'transparent'};">
+          <span style="font-family:sans-serif; color:#333333;">
             ${evName || 'Evidence'}
           </span>
-          <span class="spoiler-eye-btn" style="background:${eyeBg}; color:#ffffff; width:22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.65rem; transition:all 0.2s ease;">
+          <span class="spoiler-eye-btn" style="background:${eyeBg}; color:#ffffff; width:22px; height:20px; border-radius:3px; display:flex; align-items:center; justify-content:center; font-size:0.65rem; transition:all 0.15s ease;">
             <i class="${eyeIconClass}"></i>
           </span>
         </div>
-        <div class="forum-spoiler-body" style="${bodyStyle} padding:0.65rem; background:#f1f5f9; border-top:1px solid #e2e8f0;">
+        <div class="forum-spoiler-body" style="${bodyStyle} padding:8px; background:#ffffff; border-top:1px solid #cccccc;">
           ${imgDisplay}
         </div>
       </div>
