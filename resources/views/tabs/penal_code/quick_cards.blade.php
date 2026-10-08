@@ -170,17 +170,17 @@
             $dbCode = $allPenalCodesList->first(function($p) use ($item) {
               return str_contains($p->code, $item['code']);
             });
-            $codeStr = $dbCode ? $dbCode->code . '. ' . $dbCode->title : $item['code'];
+            $codeStr = $dbCode ? $dbCode->code . ' ' . $dbCode->title : $item['code'];
           @endphp
           <div class="case-guide-row">
             <span class="case-guide-label" title="{{ $item['label'] }}">{{ $item['label'] }}</span>
             <div class="case-guide-right">
               <div class="indicator-bar {{ ($dbCode && $dbCode->type === 'Felony') ? 'indicator-red' : (($dbCode && $dbCode->type === 'Court Verdict') ? 'indicator-orange' : 'indicator-blue') }}"></div>
               <div class="case-code-box {{ ($dbCode && $dbCode->type === 'Felony') ? 'danger-box' : (($dbCode && $dbCode->type === 'Court Verdict') ? 'warning-box' : '') }}">
-                <span class="case-code-text" title="{{ $dbCode ? $dbCode->code . '. ' . $dbCode->title : $item['code'] }}">
-                  <i class="fa-regular fa-folder-open" style="margin-right: 0.25rem;"></i> {{ $dbCode ? $dbCode->code . '. ' . $dbCode->title : $item['code'] }}
+                <span class="case-code-text" title="{{ $dbCode ? $dbCode->code . ' ' . $dbCode->title : $item['code'] }}">
+                  <i class="fa-regular fa-folder-open" style="margin-right: 0.25rem;"></i> {{ $dbCode ? $dbCode->code . ' ' . $dbCode->title : $item['code'] }}
                 </span>
-                <button class="case-copy-btn" onclick="copyPenalText('{{ addslashes($dbCode ? $dbCode->code . '. ' . $dbCode->title : $item['code']) }}', this)" title="Copy Code">
+                <button class="case-copy-btn" onclick="copyPenalText('{{ addslashes($dbCode ? $dbCode->code . ' ' . $dbCode->title : $item['code']) }}', this)" title="Copy Code">
                   <i class="fa-regular fa-copy"></i>
                 </button>
               </div>
@@ -202,7 +202,7 @@
               <div class="case-guide-right">
                 <div class="indicator-bar {{ $codeItem->type === 'Felony' ? 'indicator-red' : ($codeItem->type === 'Court Verdict' ? 'indicator-orange' : 'indicator-blue') }}"></div>
                 <div class="case-code-box {{ $codeItem->type === 'Felony' ? 'danger-box' : ($codeItem->type === 'Court Verdict' ? 'warning-box' : '') }}">
-                  <span class="case-code-text" title="{{ $codeItem->code }}. {{ $codeItem->title }}">
+                  <span class="case-code-text" title="{{ $codeItem->code }} {{ $codeItem->title }}">
                     <i class="fa-regular fa-folder-open" style="margin-right: 0.25rem;"></i> {{ $codeItem->code }}
                   </span>
                   <button class="case-copy-btn" onclick="copyPenalText('{{ addslashes($codeItem->code) }}', this)" title="Copy Code">
@@ -235,7 +235,7 @@
               <div class="case-guide-right">
                 <div class="indicator-bar {{ $codeItem->type === 'Felony' ? 'indicator-red' : ($codeItem->type === 'Court Verdict' ? 'indicator-orange' : 'indicator-blue') }}"></div>
                 <div class="case-code-box {{ $codeItem->type === 'Felony' ? 'danger-box' : ($codeItem->type === 'Court Verdict' ? 'warning-box' : '') }}">
-                  <span class="case-code-text" title="{{ $codeItem->code }}. {{ $codeItem->title }}">
+                  <span class="case-code-text" title="{{ $codeItem->code }} {{ $codeItem->title }}">
                     <i class="fa-regular fa-folder-open" style="margin-right: 0.25rem;"></i> {{ $codeItem->code }}
                   </span>
                   <button class="case-copy-btn" onclick="copyPenalText('{{ addslashes($codeItem->code) }}', this)" title="Copy Code">

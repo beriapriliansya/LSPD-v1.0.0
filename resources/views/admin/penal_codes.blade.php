@@ -195,8 +195,8 @@
               <div class="case-guide-right" style="max-width: 70%;">
                 <div class="indicator-bar {{ ($dbCode && $dbCode->type === 'Felony') ? 'indicator-red' : (($dbCode && $dbCode->type === 'Court Verdict') ? 'indicator-orange' : 'indicator-blue') }}"></div>
                 <div class="case-code-box {{ ($dbCode && $dbCode->type === 'Felony') ? 'danger-box' : (($dbCode && $dbCode->type === 'Court Verdict') ? 'warning-box' : '') }}" style="display: flex; align-items: center; justify-content: space-between; gap: 0.35rem; width: 100%; min-width: 0;">
-                  <span class="case-code-text" style="flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="{{ $dbCode ? $dbCode->code . '. ' . $dbCode->title : $item['code'] }}">
-                    <i class="fa-regular fa-folder-open" style="margin-right: 0.25rem;"></i> {{ $dbCode ? $dbCode->code . '. ' . $dbCode->title : $item['code'] }}
+                  <span class="case-code-text" style="flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="{{ $dbCode ? $dbCode->code . ' ' . $dbCode->title : $item['code'] }}">
+                    <i class="fa-regular fa-folder-open" style="margin-right: 0.25rem;"></i> {{ $dbCode ? $dbCode->code . ' ' . $dbCode->title : $item['code'] }}
                   </span>
                   
                   <!-- Admin Action Buttons (Edit & Delete) -->
@@ -233,7 +233,7 @@
                 <div class="case-guide-right" style="max-width: 70%;">
                   <div class="indicator-bar {{ $codeItem->type === 'Felony' ? 'indicator-red' : ($codeItem->type === 'Court Verdict' ? 'indicator-orange' : 'indicator-blue') }}"></div>
                   <div class="case-code-box {{ $codeItem->type === 'Felony' ? 'danger-box' : ($codeItem->type === 'Court Verdict' ? 'warning-box' : '') }}" style="display: flex; align-items: center; justify-content: space-between; gap: 0.35rem; width: 100%; min-width: 0;">
-                    <span class="case-code-text" style="flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="{{ $codeItem->code }}. {{ $codeItem->title }}">
+                    <span class="case-code-text" style="flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="{{ $codeItem->code }} {{ $codeItem->title }}">
                       <i class="fa-regular fa-folder-open" style="margin-right: 0.25rem;"></i> {{ $codeItem->code }}
                     </span>
                     
@@ -300,7 +300,7 @@
                 <div class="case-guide-right" style="max-width: 70%;">
                   <div class="indicator-bar {{ $codeItem->type === 'Felony' ? 'indicator-red' : ($codeItem->type === 'Court Verdict' ? 'indicator-orange' : 'indicator-blue') }}"></div>
                   <div class="case-code-box {{ $codeItem->type === 'Felony' ? 'danger-box' : ($codeItem->type === 'Court Verdict' ? 'warning-box' : '') }}" style="display: flex; align-items: center; justify-content: space-between; gap: 0.35rem; width: 100%; min-width: 0;">
-                    <span class="case-code-text" style="flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="{{ $codeItem->code }}. {{ $codeItem->title }}">
+                    <span class="case-code-text" style="flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="{{ $codeItem->code }} {{ $codeItem->title }}">
                       <i class="fa-regular fa-folder-open" style="margin-right: 0.25rem;"></i> {{ $codeItem->code }}
                     </span>
                     
@@ -392,7 +392,7 @@
         <div style="display: flex; align-items: flex-start; gap: 0.55rem; flex: 1; min-width: 0;">
           <span class="status-dot-badge {{ $dotClass }}" title="Tipe: {{ $codeItem->type }}"></span>
           <span class="penal-ref-code" style="font-weight: 800; font-size: 0.85rem; line-height: 1.35; word-break: break-word;">
-            {{ $codeItem->code }}. {{ strtoupper($codeItem->title) }}
+            {{ $codeItem->code }} {{ strtoupper($codeItem->title) }}
           </span>
         </div>
 
