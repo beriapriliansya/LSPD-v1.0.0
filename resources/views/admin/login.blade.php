@@ -136,10 +136,6 @@
         <i class="fa-solid fa-key"></i> OTENTIKASI HAK AKSES
       </button>
     </form>
-
-    <div style="margin-top: 1.5rem; font-size: 0.72rem; color: #64748b;">
-      Admin PIN: <strong style="color: #3b82f6;">110011</strong>
-    </div>
   </div>
 </body>
 
