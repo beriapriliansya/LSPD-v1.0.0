@@ -428,6 +428,11 @@
               <i class="fa-solid fa-book-skull"></i> Penal Code Cheat
             </a>
           </li>
+          <li class="admin-nav-item">
+            <a href="{{ route('admin.officers') }}" class="admin-nav-link">
+              <i class="fa-solid fa-id-card"></i> Update Profil Officer
+            </a>
+          </li>
         </ul>
       </div>
 
