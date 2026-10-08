@@ -1627,6 +1627,76 @@ r.chronology + "\n\n" +
     }
 
     function renderGenerator() {
+    window.toggleForumSpoiler = function(headerEl) {
+      if (!headerEl) return;
+      const box = headerEl.closest('.forum-spoiler-box');
+      if (!box) return;
+      const body = box.querySelector('.forum-spoiler-body');
+      const eyeBtn = box.querySelector('.spoiler-eye-btn');
+      const eyeIcon = eyeBtn ? eyeBtn.querySelector('i') : null;
+
+      if (body) {
+        const isHidden = body.style.display === 'none' || !body.style.display;
+        body.style.display = isHidden ? 'block' : 'none';
+        headerEl.style.borderBottomColor = isHidden ? '#cbd5e1' : 'transparent';
+        headerEl.style.background = isHidden ? '#e2e8f0' : '#f8fafc';
+        if (eyeBtn) eyeBtn.style.background = isHidden ? '#22c55e' : '#ef4444';
+        if (eyeIcon) {
+          eyeIcon.className = isHidden ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye';
+        }
+      }
+    };
+
+    function createForumSpoilerHtml(evName, evUrl) {
+      let imgDisplay = '';
+      const cleanUrl = evUrl ? evUrl.trim() : '';
+
+      if (cleanUrl && (cleanUrl.startsWith('http://') || cleanUrl.startsWith('https://') || cleanUrl.startsWith('data:image'))) {
+        imgDisplay = `
+          <div style="text-align:center;">
+            <a href="${cleanUrl}" target="_blank" rel="noopener" title="Klik untuk membuka gambar ukuran penuh">
+              <img src="${cleanUrl}" alt="${evName}" style="max-width:100%; max-height:280px; border-radius:4px; border:1px solid #cbd5e1; box-shadow:0 2px 4px rgba(0,0,0,0.1); object-fit:contain; background:#ffffff;" onerror="this.onerror=null; this.src='https://via.placeholder.com/600x300/11224e/ffffff?text=${encodeURIComponent(evName)}';" />
+            </a>
+            <div style="margin-top:0.35rem; font-size:0.7rem; color:#64748b;">
+              <a href="${cleanUrl}" target="_blank" rel="noopener" style="color:#2563eb; text-decoration:underline; font-weight:600;"><i class="fa-solid fa-arrow-up-right-from-square" style="font-size:0.65rem;"></i> Buka Gambar Penuh</a>
+            </div>
+          </div>
+        `;
+      } else if (cleanUrl && cleanUrl !== '-') {
+        imgDisplay = `
+          <div style="padding:0.4rem 0.6rem; font-size:0.78rem; color:#334155; word-break:break-all; background:#ffffff; border-radius:3px; border:1px solid #e2e8f0;">
+            <i class="fa-solid fa-link" style="color:#3b82f6; margin-right:0.3rem;"></i> ${cleanUrl}
+          </div>
+        `;
+      } else {
+        // Default realistic evidence preview placeholder
+        imgDisplay = `
+          <div style="text-align:center;">
+            <img src="https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=600&q=80" alt="${evName}" style="max-width:100%; max-height:220px; border-radius:4px; border:1px solid #cbd5e1; object-fit:cover; display:block; margin:0 auto;" onerror="this.onerror=null; this.src='https://via.placeholder.com/600x300/11224e/ffffff?text=${encodeURIComponent(evName)}';" />
+            <div style="margin-top:0.35rem; font-size:0.68rem; color:#64748b; font-style:italic;">[Evidence Image Preview] ${evName}</div>
+          </div>
+        `;
+      }
+
+      return `
+        <div class="forum-spoiler-box" style="border:1px solid #cbd5e1; background:#ffffff; border-radius:4px; overflow:hidden; margin-bottom:0.35rem; transition:all 0.15s ease;">
+          <div class="forum-spoiler-header" onclick="toggleForumSpoiler(this)" style="background:#f8fafc; padding:0.4rem 0.65rem; display:flex; justify-content:space-between; align-items:center; font-size:0.78rem; color:#1e293b; cursor:pointer; user-select:none; border-bottom:1px solid transparent; transition:background 0.15s ease;">
+            <span style="font-weight:600; display:flex; align-items:center; gap:0.45rem;">
+              <i class="fa-solid fa-camera" style="color:#3b82f6; font-size:0.75rem;"></i>
+              ${evName || 'Evidence'}
+            </span>
+            <span class="spoiler-eye-btn" style="background:#ef4444; color:#ffffff; width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.65rem; transition:transform 0.2s ease, background-color 0.2s ease;">
+              <i class="fa-solid fa-eye"></i>
+            </span>
+          </div>
+          <div class="forum-spoiler-body" style="display:none; padding:0.6rem; background:#f1f5f9; border-top:1px solid #e2e8f0;">
+            ${imgDisplay}
+          </div>
+        </div>
+      `;
+    }
+
+    function renderGenerator() {
       const officer = officerInput.value.trim() || 'Answer';
       const station = stationInput.value.trim() || 'Answer';
       const rank = rankInput.value.trim() || 'Answer';
@@ -1648,7 +1718,7 @@ r.chronology + "\n\n" +
         if (evName || evUrl) {
           const imgContent = (evUrl.startsWith('http') && !evUrl.includes('[img]')) ? `[img]${evUrl}[/img]` : (evUrl || '-');
           evidenceBbcodeList.push(`[spoiler=${evName || 'Evidence'}]${imgContent}[/spoiler]`);
-          evidenceHtmlList.push(`<div><strong>${evName || 'Evidence'}:</strong> ${evUrl || '-'}</div>`);
+          evidenceHtmlList.push(createForumSpoilerHtml(evName || 'Evidence', evUrl));
         }
       });
 
@@ -1684,7 +1754,7 @@ r.chronology + "\n\n" +
             if (evName || evUrl) {
               const imgContent = (evUrl.startsWith('http') && !evUrl.includes('[img]')) ? `[img]${evUrl}[/img]` : (evUrl || '-');
               subEvBbList.push(`[spoiler=${evName || 'Evidence'}]${imgContent}[/spoiler]`);
-              subEvHtmlList.push(`<div><strong>${evName || 'Evidence'}:</strong> ${evUrl || '-'}</div>`);
+              subEvHtmlList.push(createForumSpoilerHtml(evName || 'Evidence', evUrl));
             }
           });
 
@@ -1815,14 +1885,11 @@ ${evidencesBbcodeStr}
 
         evRowsArr.forEach(row => {
           const nameIn = row.querySelector('.p-ev-name');
+          const urlIn = row.querySelector('.p-ev-url');
           const evName = nameIn ? nameIn.value.trim() : '';
-          if (evName) {
-            evBoxesHtml += `
-              <div style="border:1px solid #d1d5db; background:#f9fafb; border-radius:3px; padding:0.35rem 0.6rem; display:flex; justify-content:space-between; align-items:center; font-size:0.78rem; color:#374151;">
-                <span>${evName}</span>
-                <span style="background:#ef4444; color:#ffffff; width:18px; height:18px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.6rem;"><i class="fa-solid fa-eye"></i></span>
-              </div>
-            `;
+          const evUrl = urlIn ? urlIn.value.trim() : '';
+          if (evName || evUrl) {
+            evBoxesHtml += createForumSpoilerHtml(evName || 'Evidence', evUrl);
           }
         });
 
@@ -1830,18 +1897,9 @@ ${evidencesBbcodeStr}
           fpEvidences.innerHTML = evBoxesHtml;
         } else {
           fpEvidences.innerHTML = `
-            <div style="border:1px solid #d1d5db; background:#f9fafb; border-radius:3px; padding:0.35rem 0.6rem; display:flex; justify-content:space-between; align-items:center; font-size:0.78rem; color:#374151;">
-              <span>footage vehicle</span>
-              <span style="background:#ef4444; color:#ffffff; width:18px; height:18px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.6rem;"><i class="fa-solid fa-eye"></i></span>
-            </div>
-            <div style="border:1px solid #d1d5db; background:#f9fafb; border-radius:3px; padding:0.35rem 0.6rem; display:flex; justify-content:space-between; align-items:center; font-size:0.78rem; color:#374151;">
-              <span>vehicle inventory</span>
-              <span style="background:#ef4444; color:#ffffff; width:18px; height:18px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.6rem;"><i class="fa-solid fa-eye"></i></span>
-            </div>
-            <div style="border:1px solid #d1d5db; background:#f9fafb; border-radius:3px; padding:0.35rem 0.6rem; display:flex; justify-content:space-between; align-items:center; font-size:0.78rem; color:#374151;">
-              <span>suspect</span>
-              <span style="background:#ef4444; color:#ffffff; width:18px; height:18px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.6rem;"><i class="fa-solid fa-eye"></i></span>
-            </div>
+            ${createForumSpoilerHtml('footage vehicle', '')}
+            ${createForumSpoilerHtml('vehicle inventory', '')}
+            ${createForumSpoilerHtml('suspect', '')}
           `;
         }
       }
@@ -1869,14 +1927,11 @@ ${evidencesBbcodeStr}
             const subEvRows = card.querySelectorAll('.sub-ev-row');
             subEvRows.forEach(row => {
               const nameIn = row.querySelector('.sub-ev-name');
+              const urlIn = row.querySelector('.sub-ev-url');
               const evName = nameIn ? nameIn.value.trim() : '';
-              if (evName) {
-                subEvBoxesHtml += `
-                  <div style="border:1px solid #d1d5db; background:#f9fafb; border-radius:3px; padding:0.35rem 0.6rem; display:flex; justify-content:space-between; align-items:center; font-size:0.78rem; color:#374151;">
-                    <span>${evName}</span>
-                    <span style="background:#ef4444; color:#ffffff; width:18px; height:18px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.6rem;"><i class="fa-solid fa-eye"></i></span>
-                  </div>
-                `;
+              const evUrl = urlIn ? urlIn.value.trim() : '';
+              if (evName || evUrl) {
+                subEvBoxesHtml += createForumSpoilerHtml(evName || 'Evidence', evUrl);
               }
             });
 
