@@ -1592,24 +1592,20 @@ r.chronology + "\n\n" +
     const box = targetEl.closest('.forum-spoiler-box');
     if (!box) return;
     const body = box.querySelector('.forum-spoiler-body');
-    const headerEl = box.querySelector('.forum-spoiler-header');
-    const eyeBtn = box.querySelector('.spoiler-eye-btn');
-    const eyeIcon = eyeBtn ? eyeBtn.querySelector('i') : null;
+    const icon = box.querySelector('.spoiler-toggle-icon');
 
     if (body) {
       const isHidden = getComputedStyle(body).display === 'none' || body.style.display === 'none';
       body.style.display = isHidden ? 'block' : 'none';
-      if (headerEl) {
-        headerEl.style.borderBottomColor = isHidden ? '#cccccc' : 'transparent';
+      if (icon) {
+        icon.textContent = isHidden ? '▼' : '►';
       }
-      if (eyeBtn) eyeBtn.style.background = isHidden ? '#5cb85c' : '#d9534f';
-      if (eyeIcon) eyeIcon.className = isHidden ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye';
     }
   };
 
   // Global click listener for spoiler toggle
   document.addEventListener('click', function(e) {
-    const trigger = e.target.closest('.forum-spoiler-header, .spoiler-eye-btn');
+    const trigger = e.target.closest('.forum-spoiler-header');
     if (trigger) {
       window.toggleForumSpoiler(trigger);
     }
@@ -1618,12 +1614,12 @@ r.chronology + "\n\n" +
   function createForumSpoilerHtml(evName, evUrl) {
     const cleanUrl = evUrl ? evUrl.trim() : '';
     const hasValidUrl = cleanUrl && (cleanUrl.startsWith('http://') || cleanUrl.startsWith('https://') || cleanUrl.startsWith('data:image'));
+    const displayName = evName || 'Bukti';
     
-    // Default to open (display:block) when valid URL is provided so photo is immediately visible!
-    const isDefaultOpen = hasValidUrl;
+    // Default to open (display:block) so photo is immediately visible!
+    const isDefaultOpen = true;
     const bodyStyle = isDefaultOpen ? 'display:block;' : 'display:none;';
-    const eyeBg = isDefaultOpen ? '#5cb85c' : '#d9534f';
-    const eyeIconClass = isDefaultOpen ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye';
+    const arrowChar = isDefaultOpen ? '▼' : '►';
 
     let imgDisplay = '';
 
@@ -1631,13 +1627,13 @@ r.chronology + "\n\n" +
       imgDisplay = `
         <div style="text-align:center;">
           <a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" title="Klik untuk membuka gambar ukuran penuh">
-            <img src="${cleanUrl}" alt="${evName}" referrerpolicy="no-referrer" style="max-width:100%; height:auto; border:1px solid #cccccc; display:block; margin:0 auto; background:#ffffff;" onerror="this.onerror=null; this.src='https://via.placeholder.com/600x300/11224e/ffffff?text=Gagal+Memuat+Gambar';" />
+            <img src="${cleanUrl}" alt="${displayName}" referrerpolicy="no-referrer" style="max-width:100%; height:auto; border-radius:3px; display:block; margin:0 auto; background:#ffffff;" onerror="this.onerror=null; this.src='https://via.placeholder.com/600x300/11224e/ffffff?text=Gagal+Memuat+Gambar';" />
           </a>
         </div>
       `;
     } else if (cleanUrl && cleanUrl !== '-') {
       imgDisplay = `
-        <div style="padding:0.4rem 0.6rem; font-size:0.78rem; color:#334155; word-break:break-all; background:#ffffff; border:1px solid #cccccc;">
+        <div style="padding:0.4rem 0.6rem; font-size:0.78rem; color:#334155; word-break:break-all; background:#ffffff;">
           <i class="fa-solid fa-link" style="color:#3b82f6; margin-right:0.3rem;"></i> ${cleanUrl}
         </div>
       `;
@@ -1645,22 +1641,18 @@ r.chronology + "\n\n" +
       // Default realistic evidence preview placeholder
       imgDisplay = `
         <div style="text-align:center;">
-          <img src="https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=600&q=80" alt="${evName}" style="max-width:100%; height:auto; border:1px solid #cccccc; display:block; margin:0 auto;" onerror="this.onerror=null; this.src='https://via.placeholder.com/600x300/11224e/ffffff?text=${encodeURIComponent(evName)}';" />
+          <img src="https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=600&q=80" alt="${displayName}" style="max-width:100%; height:auto; border-radius:3px; display:block; margin:0 auto;" onerror="this.onerror=null; this.src='https://via.placeholder.com/600x300/11224e/ffffff?text=${encodeURIComponent(displayName)}';" />
         </div>
       `;
     }
 
     return `
-      <div class="forum-spoiler-box" style="border:1px solid #cccccc; background:#ffffff; margin-bottom:0.4rem;">
-        <div class="forum-spoiler-header" style="background:#f4f4f4; padding:0.4rem 0.6rem; display:flex; justify-content:space-between; align-items:center; font-size:0.85rem; color:#333333; cursor:pointer; user-select:none; border-bottom:1px solid ${isDefaultOpen ? '#cccccc' : 'transparent'};">
-          <span style="font-family:sans-serif; color:#333333;">
-            ${evName || 'Evidence'}
-          </span>
-          <span class="spoiler-eye-btn" style="background:${eyeBg}; color:#ffffff; width:22px; height:20px; border-radius:3px; display:flex; align-items:center; justify-content:center; font-size:0.65rem; transition:all 0.15s ease;">
-            <i class="${eyeIconClass}"></i>
-          </span>
+      <div class="forum-spoiler-box" style="border:1px solid #c5d7e8; border-radius:4px; background:#ffffff; margin-bottom:0.5rem; overflow:hidden;">
+        <div class="forum-spoiler-header" style="background:#eaf2f8; padding:0.4rem 0.75rem; font-size:0.85rem; font-weight:700; color:#1e293b; cursor:pointer; user-select:none; display:flex; align-items:center; gap:6px;">
+          <span class="spoiler-toggle-icon" style="color:#2563eb; font-size:0.75rem; display:inline-block; width:12px;">${arrowChar}</span>
+          <span>Spoiler: ${displayName}</span>
         </div>
-        <div class="forum-spoiler-body" style="${bodyStyle} padding:8px; background:#ffffff; border-top:1px solid #cccccc;">
+        <div class="forum-spoiler-body" style="${bodyStyle} padding:8px; background:#ffffff; border-top:1px solid #c5d7e8;">
           ${imgDisplay}
         </div>
       </div>
